@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fragrance;
 
 class FragranceController extends Controller
 {
@@ -11,7 +12,13 @@ class FragranceController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $fragrances=Fragrance::all();
+            return $fragrances;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json(['error' => 'Failed to fetch fragrances'], 500); // Return a 500 error
+        }
     }
 
     /**

@@ -1,0 +1,234 @@
+.background{
+    height: 50px;
+    margin: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .background img{
+    width: 100%;
+    height: 450px;
+    opacity: 80%;
+    border-bottom: 1.5px solid ;
+  }
+  .backgroundList{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    top: 70px;
+  }
+  .backgroundList article{
+    width: 150px;
+    margin: 1%;
+  }
+  .backgroundList img{
+    width: 100%;
+    height: 250px;
+    border-radius: 7cqmax;
+    opacity: 80%;
+    border: 1px solid black;
+  }
+  header{
+    display: flex;
+    justify-content: center;
+  }
+  header nav{
+    background-color: rgba(255, 255, 255, 0.844);
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5%;
+    width: 700px;
+    font-family: monospace;
+    font-size: 1.1em;
+  }
+  header nav a{
+    color: black;
+    margin: 3%;
+    text-decoration: none;
+  }
+  header nav input[type=button]{
+    background-color: white;
+    border:3px solid #bf9345;
+    color: #dea74a;
+    font-weight: bold;
+  }
+  #slogan{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: -170px;
+    font-size: 3em;
+    color: #000000;
+    font-family: monospace;
+  }
+  #slogan p{
+    position: relative;
+    top: -50px;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+  }
+  .DiorSection{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  #LongDior{
+    width: 300px;
+  }
+  #LongDior img{
+    width: 100%;
+    height: 450px;
+    border-radius: 30px;
+    /* border: #000000 1px solid; */
+  }
+  
+  #horizontalDior article img{
+    width: 100%;
+    height: 160px;
+    margin-top: 0px;
+    margin-left: 20px;
+    border-radius: 30px;
+  }
+  #horizontalDior article{
+    width: 350px;
+  }
+  #horizontalDior article h1{
+    font-size: 3em;
+    margin: 40px;
+  }
+  #horizontalDior article p{
+    font-size: 1.5em;
+    font-family: monospace;
+  }
+  #TextDior input{
+    margin-bottom: 0px;
+    border: 2px solid black;
+    background-color: white;
+    padding: 2% 2%;
+    margin-bottom: 29px;
+  }
+  #parfumSection{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #background2Img{
+    width: 100%;
+    margin-top: 5%;
+  }
+  #background2Img img{
+    width: 100%;
+    height: 450px;
+    opacity: 70%;
+    border: #000000 1px solid;
+  }
+  #background2 h1{
+    position: relative;
+    font-size: 4em;
+    text-align: center;
+    bottom: 300px;
+    font-family: monospace;
+  }
+  #MaleFemaleparfumes{
+    display: flex;
+    justify-content: center;
+  }
+  #MaleFemaleparfumes .male,.female{
+    width: 250px;
+    margin: 1%;
+    
+  }
+  #MaleFemaleparfumes img{
+    width: 100%;
+    height: 350px;
+    border-top-left-radius: 9cqmax;
+    border-top-right-radius: 9cqmax;
+    border: 1px solid black;
+  }
+  #MaleFemaleparfumes .male{
+    margin-top: 120px;
+  }
+  /* Fragrances */
+  .Card{
+    border: 2px solid #000000;
+    margin: 1%;
+    display: flex;
+    padding: 1%;
+    height: 230px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 6px #dea84aad;
+    transition: all 0.25s ease-in-out;
+    font-size: 0.9em;
+    font-family: monospace;
+  }
+  .BookInfo{
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .Card:hover{
+    transform: scale(1.04);
+    background-color: white;
+  }
+  /* .Card section{
+    width: 50%;
+  } */
+  .Card input[type=button]:hover{
+    background-color: #bf9345;
+    box-shadow: 0px 0px 6px #dea74a;
+  }
+  .Card img{
+    border-radius: 10px;
+    width: 160px;
+    height: 90%;
+  }
+  .Card input[type=button]{
+    width: 100%;
+    padding: 3%;
+    background-color: #000000bf;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+  }
+  .Card h3{
+    color: #bf9345 ;
+    font-size: larger;
+  }
+  .Card span{
+    font-style: italic;
+    font-weight: bold;
+    color: #dea74a ;
+  }
+  #CardGlobal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1% 0%;
+  }
+  .SelectBar{
+    margin-top:5% ;
+  }
+  .hidden{
+    display: none;
+  }
+  /* header*/
+  .active-link{
+    color: #bf9345;
+    font-weight: bold;
+  }
+  .Fragrance_header nav{
+    background-color: rgba(0, 0, 0, 0.253) ;
+  }
