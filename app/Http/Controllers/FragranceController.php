@@ -13,10 +13,32 @@ class FragranceController extends Controller
     public function index()
     {
         try {
-            $fragrances=Fragrance::all();
-            return $fragrances;
+            $f=Fragrance::all();
+            $fragrances=Fragrance::with('brand')->get();
+            $fragrancesFormatted=$fragrances->map(function ($fragrance){
+                return [
+                    'id' => $fragrance->id,
+                    'name' => $fragrance->name,
+                    'release_date' => $fragrance->release_date,
+                    'price' => $fragrance->price,
+                    'volume_ml' => $fragrance->volume_ml,
+                    'image' => $fragrance->image,
+                    'genre' => $fragrance->genre,
+                    'sex' => $fragrance->sex,
+                    'stock' => $fragrance->stock,
+                    'brand' => $fragrance->brand ? [ // Conditional creation of the brand array
+                        'id' => $fragrance->brand->id,
+                        'name' => $fragrance->brand->name,
+                    ] : null,
+                    // ... other fragrance attributes
+                ];
+            });
+            // dd($fragrancesFormatted);
+            return $fragrancesFormatted;
+            // return$f;
+            // return  response()->json($fragrancesFormatted, 200);
         } catch (\Exception $e) {
-            Log::error($e);
+            // Log::error($e);
             return response()->json(['error' => 'Failed to fetch fragrances'], 500); // Return a 500 error
         }
     }
@@ -66,6 +88,8 @@ class FragranceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $fragrance=Fragrance::findOrFail($id);
+        $fragrance->delete();
+        return response()->json(null,204);
     }
 }

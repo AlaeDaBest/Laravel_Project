@@ -232,3 +232,8 @@
   .Fragrance_header nav{
     background-color: rgba(0, 0, 0, 0.253) ;
   }
+#Icons{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
