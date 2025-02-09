@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Fragrance from "./Fragrance";
 import Header from "./Header";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const ListFragrances=()=>{
     const [fragrances,setFragrances]=useState([]);
     const[brands,setBrands]=useState([]);
@@ -42,7 +43,7 @@ const ListFragrances=()=>{
     const sortedFragrances=getSortedFragrances();
     return(
         <div>
-            <Header/>           
+            <Header setSearchedTerm={setSearchedTerm} />           
             <section className="SelectBar">
                 <div>
                     <label htmlFor="">Select Sex : </label>
@@ -68,6 +69,7 @@ const ListFragrances=()=>{
                         <option value="Desc">Newest to Oldest</option>
                         <option value="Asc">Oldest to Newest</option>
                     </select>
+                    <Link to="/addFragrance">Add Fragrance</Link>
                 </div>
             </section>
             <section id="CardGlobal">
