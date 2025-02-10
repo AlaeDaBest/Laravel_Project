@@ -18,5 +18,6 @@ Route::get('/', function () {
 });
 use App\Http\Controllers\FragranceController;
 Route::resource('/fragrances', FragranceController::class);
+// Route::post('/addFragrance',[FragranceController::class,'store']);
 use App\Http\Controllers\BrandController;
 Route::resource('/brands', BrandController::class);

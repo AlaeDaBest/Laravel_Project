@@ -5,7 +5,6 @@ import { BiSolidTrash } from "react-icons/bi";
 import TrashIcon from "./Icons/TrashIcon";
 const Fragrance=(props)=>{
     const [hidden,setHidden]=useState(true);
-    // const dispatch=useDispatch();
     return(
         <section className="Card" onClick={()=>setHidden(!hidden)}>
             <section className="ImageSection">
