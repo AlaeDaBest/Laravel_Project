@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsCartDash } from "react-icons/bs";
 import { BsCartCheckFill } from "react-icons/bs";
 const CartIcon=()=>{
-    const [checked,setChecked]=useState(false);
+    const [checked,setChecked]=useState(true);
     function check(){
         setChecked(!checked);
     }

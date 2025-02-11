@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
-const Home=()=>{
+const Home=({isLoggedIn,setIsLoggedIn})=>{
     const backgroundImage=['/Images/Home/kristina.jpg','/Images/Home/lanvin.jpg','/Images/Home/lunar.jpg','/Images/Home/valeriya.jpg','/Images/Home/vanessa.jpg','/Images/Home/daisy.jpg'];
     const background2Images=['/Images/Home/jadore.jpg','/Images/Home/JeanPaul.jpg','/Images/Home/PoisonFresh.jpg','/Images/Home/Sauvage.jpg','/Images/Home/valentino.jpg'];
+    const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
+    console.log('..',userRole);
     return(
         <div>
-            <Header/>
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div>
                 <section className="background">
                     <img src="/Images/Home/backgroundG.jpg" alt="background" />

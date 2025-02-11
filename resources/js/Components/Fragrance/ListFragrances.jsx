@@ -24,13 +24,13 @@ const ListFragrances=()=>{
         })
         .catch(error=>console.log('There was an error fetching the brands:',error))
     },[])
-    // console.log(brands);
-    // console.log(fragrances);
     const [searchedTearm,setSearchedTerm]=useState('');
     const [selectedSex,setSelectedSex]=useState('');
     const [selectedBrand,setSelectedBrand]=useState('');
     const [sortedType,setSortedType]=useState('');
-    let filteredFragrances=fragrances.filter((item)=>((selectedSex?item.sex==selectedSex:true)&&(selectedBrand?item.brand_id==selectedBrand:true)&&(searchedTearm?item.name.toLowerCase().includes(searchedTearm.toLowerCase()):true)));
+    let ff=fragrances.filter((item)=>selectedBrand?item.brand?.id==selectedBrand:true);
+    console.log(ff)
+    let filteredFragrances=fragrances.filter((item)=>((selectedSex?item.sex==selectedSex:true)&&(selectedBrand?item.brand?.id==selectedBrand:true)&&(searchedTearm?item.name.toLowerCase().includes(searchedTearm.toLowerCase()):true)));
     var getSortedFragrances=()=>{
         let sortedResult=filteredFragrances;
         if(sortedType=='Asc'){
@@ -41,6 +41,11 @@ const ListFragrances=()=>{
         return sortedResult;
     }
     const sortedFragrances=getSortedFragrances();
+    const ItemsPerPage=15;
+    const [currentPage,setCurrentPage]=useState(1);
+    const TotalPageNumber=Math.ceil(sortedFragrances.length/ItemsPerPage);
+    const currentFragrances=sortedFragrances.slice((currentPage-1)*ItemsPerPage,currentPage*ItemsPerPage)
+    console.log(currentFragrances)
     return(
         <div>
             <Header setSearchedTerm={setSearchedTerm} />           
@@ -56,7 +61,10 @@ const ListFragrances=()=>{
                 </div>
                 <div>
                     <label htmlFor="">Select Brand : </label>
-                    <select name="" id="" onChange={(e)=>setSelectedBrand(e.target.value)}>
+                    <select name="" id="" onChange={(e)=>{
+                        setSelectedBrand(e.target.value)
+                        console.log(selectedBrand)
+                        }}>
                         <option value="">All </option>
                         {brands.map(brand=>(
                             <option key={brand.id} value={brand.id}>{brand.name}</option>
@@ -73,10 +81,15 @@ const ListFragrances=()=>{
                 </div>
             </section>
             <section id="CardGlobal">
-                {sortedFragrances.map((fragrance,i)=>(
+                {currentFragrances.map((fragrance,i)=>(
                     <Fragrance key={i} fragrance={fragrance} setFragrances={setFragrances} fragrances={fragrances} />
                 ))}
             </section>
+            <div className="Pagination">
+                <input type="button" value="Previous" onClick={()=>setCurrentPage(currentPage-1)} disabled={currentPage===1?true:false} />
+                <span>Page{currentPage} of {TotalPageNumber}</span>
+                <input type="button" value="Next" onClick={()=>setCurrentPage(currentPage+1)} disabled={currentPage===TotalPageNumber?true:false} />
+            </div>
         </div>
     )
 }

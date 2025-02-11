@@ -18,6 +18,16 @@ Route::get('/', function () {
 });
 use App\Http\Controllers\FragranceController;
 Route::resource('/fragrances', FragranceController::class);
-// Route::post('/addFragrance',[FragranceController::class,'store']);
+
 use App\Http\Controllers\BrandController;
 Route::resource('/brands', BrandController::class);
+
+// Route d registration 
+use App\Http\Controllers\AuthController;
+Route::post('/register', [AuthController::class, 'register']);
+// Route d login 
+Route::post('/login', [AuthController::class, 'login']);
+// Route d logout
+Route::post('/logout', [AuthController::class, 'logout']);
+
+Route::get('/profile', [AuthController::class, 'getUser'])->middleware('auth:sanctum'); 

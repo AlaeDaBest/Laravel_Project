@@ -14,11 +14,7 @@ const Header=(props)=>{
                     <input type="text" name="" id="" onChange={(e)=>props.setSearchedTerm(e.target.value)} />
                     <input type="button" value="Search" />
                 </div>
-                <div>
-                    <Link to='/cart'>Cart</Link>
-                    <Link to='/favorites'>Favorites</Link>
-                </div>
-            </nav>  
+            </nav> 
         </header>
     )
 }
