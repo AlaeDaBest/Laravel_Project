@@ -3,8 +3,11 @@ import HeartIcon from "./Icons/HeartIcon";
 import CartIcon from "./Icons/CartIcon";
 import { BiSolidTrash } from "react-icons/bi";
 import TrashIcon from "./Icons/TrashIcon";
+import EditFragrance from "./EditFragrance";
+import EditIcon from "./Icons/EditIcon";
 const Fragrance=(props)=>{
     const [hidden,setHidden]=useState(true);
+    const [isEditing, setIsEditing] = useState(false); 
     return(
         <section className="Card" onClick={()=>setHidden(!hidden)}>
             <section className="ImageSection">
@@ -24,6 +27,7 @@ const Fragrance=(props)=>{
                     <p><span>Price:</span> {props.fragrance.price}</p>
                     <div>
                         <TrashIcon id={props.fragrance.id} setFragrances={props.setFragrances} fragrances={props.fragrances} />
+                        <EditIcon id={props.fragrance.id} setIsEditing={setIsEditing} />
                     </div>
                 </section>         
             </section>

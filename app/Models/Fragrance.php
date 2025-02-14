@@ -11,6 +11,17 @@ use App\Models\Customer;
 class Fragrance extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'brand_id',
+        'release_date',
+        'genre',
+        'sex',
+        'image', 
+        'price',
+        'volume_ml',
+        'stock',
+    ];
     public function brand()
     {
         return $this->belongsTo(Brand::class);
