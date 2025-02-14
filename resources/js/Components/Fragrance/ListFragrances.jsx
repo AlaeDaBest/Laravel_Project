@@ -45,7 +45,44 @@ const ListFragrances=()=>{
     const [currentPage,setCurrentPage]=useState(1);
     const TotalPageNumber=Math.ceil(sortedFragrances.length/ItemsPerPage);
     const currentFragrances=sortedFragrances.slice((currentPage-1)*ItemsPerPage,currentPage*ItemsPerPage)
-    console.log(currentFragrances)
+    const HandleExport=async()=>{
+        try{
+            const response=await axios.get('/export',{
+                responseType: 'blob', // This is CRUCIAL - Must be 'blob'
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                },
+            })
+            console.log('fff',response.data)
+            const blob = response.data; 
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fragrances.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }catch(error){
+            console.error('Error exporting:', error);
+
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+            console.error("Server Error:", error.response.data); // Log server error data
+            alert(`Export failed: ${error.response.data.message || "An error occurred."}`); // Display server error message or generic message
+        } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.error("Request Error:", error.request);
+            alert("Export failed: No response from the server.");
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Setup Error:", error.message);
+            alert(`Export failed: ${error.message}`);
+        }
+        }
+    }
     return(
         <div>
             <Header setSearchedTerm={setSearchedTerm} />           
@@ -78,6 +115,7 @@ const ListFragrances=()=>{
                         <option value="Asc">Oldest to Newest</option>
                     </select>
                     <Link to="/addFragrance">Add Fragrance</Link>
+                    <input type="button" value="Export Fragrances" onClick={HandleExport} />
                 </div>
             </section>
             <section id="CardGlobal">

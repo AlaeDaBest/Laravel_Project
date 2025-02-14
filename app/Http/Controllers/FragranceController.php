@@ -13,6 +13,8 @@ use Illuminate\Validation\Rule;
 use App\Models\Import\ImportFragrance;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Exports\FragrancesExport;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FragranceController extends Controller
 {
@@ -194,5 +196,9 @@ class FragranceController extends Controller
         ]);
         Excel::import(new ImportFragrance, $request->file('file'));
         return back()->with('success', 'Products imported successfully.');
+    }
+    public function export(Request $request)
+    {
+        return Excel::download(new FragrancesExport, 'fragrances.xlsx'); 
     }
 }
