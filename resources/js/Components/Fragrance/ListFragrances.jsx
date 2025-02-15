@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Fragrance from "./Fragrance";
-import Header from "./Header";
+import Header from "../Home/Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
 const ListFragrances=()=>{

@@ -9,6 +9,7 @@ import AddFragrance from './Components/Fragrance/AddFragrance';
 import Registration from './Components/Authentication/Registration';
 import Login from './Components/Authentication/Login';
 import Profile from './Components/User/Profile';
+import Cart from './Components/Cart/Cart';
 
 const App=()=>{
     const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
@@ -24,7 +25,7 @@ const App=()=>{
                 <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                 <Route path="/fragrances" element={<ListFragrances/>} />
                 {/* <Route path="/favoritess" element={<ListFavorites/>} /> */}
-                {/* <Route path="/cart" element={<ListCart/>} /> */}
+                <Route path="/cart" element={<Cart/>} /> 
                 <Route path="/addFragrance" element={<AddFragrance/>} />
                 <Route path="/register" element={<Registration/>} />
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />

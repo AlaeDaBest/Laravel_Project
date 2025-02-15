@@ -3,14 +3,28 @@ import HeartIcon from "./Icons/HeartIcon";
 import CartIcon from "./Icons/CartIcon";
 import { BiSolidTrash } from "react-icons/bi";
 import TrashIcon from "./Icons/TrashIcon";
+import axios from 'axios';
+
 const Fragrance=(props)=>{
     const [hidden,setHidden]=useState(true);
+
+  const AddToCart = async (fragranceId) => {
+    try {
+      const response = await axios.post('/cart', {
+        fragrance_id: fragranceId,
+        quantity: 1, 
+      });
+   console.log(response.data);
+    } catch (error) {
+      console.error("Il y a eu un problème lors de l'ajout au panier:", error);
+    }
+  };
     return(
         <section className="Card" onClick={()=>setHidden(!hidden)}>
             <section className="ImageSection">
                 <article id="Icons">
                     <HeartIcon fragrance={props.fragrance} />
-                    <CartIcon/>
+                    <CartIcon  onClick={() => AddToCart(props.fragrance.id)}/>
                 </article>
                 <img src={props.fragrance.image} width="200px" height="150px" alt="" />
             </section>

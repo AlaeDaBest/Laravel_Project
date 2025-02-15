@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fragrance_id')->constrained('fragrances');
-            $table->foreignId('customer_id')->constrained('customers');
-            $table->boolean('is_favorite')->default(false);
-            $table->unique(['fragrance_id','customer_id']);
+            $table->string('name')->unique();
+            $table->string('slug')->unique()->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('brands');
     }
 };

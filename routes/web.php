@@ -22,6 +22,9 @@ Route::resource('/fragrances', FragranceController::class);
 use App\Http\Controllers\BrandController;
 Route::resource('/brands', BrandController::class);
 
+use App\Http\Controllers\CartController;
+Route::resource('/cart', CartController::class);
+
 // Route d registration 
 use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cart;
+
 
 class CartController extends Controller
 {
@@ -94,4 +96,15 @@ class CartController extends Controller
              'message' => 'Article retiré du panier.'
          ]);
     }
+    public function clear()
+    {
+    Cart::where('user_id', Auth::id())->delete();
+    return response()->json([
+            'message' => 'Panier vidé avec succès.'
+    ]);
+    }
 }
+
+
+
+

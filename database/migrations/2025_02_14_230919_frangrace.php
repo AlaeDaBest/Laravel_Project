@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fragrances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id')->constrained('brands');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->string('name');
             $table->string('image');
             $table->date('release_date');
