@@ -104,7 +104,6 @@ class FragranceController extends Controller
             $fragrance->save();
             return response()->json(['message' => 'Fragrance added successfully'], 200);
         }catch(\Exception $e){
-            dd($e);
             return response()->json(['message' => 'Error adding fragrance: ' . $e->getMessage()], 500);
         }
     }

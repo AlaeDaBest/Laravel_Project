@@ -22,6 +22,9 @@ Route::resource('/fragrances', FragranceController::class);
 use App\Http\Controllers\BrandController;
 Route::resource('/brands', BrandController::class);
 
+use App\Http\Controllers\UserController;
+Route::resource('/users',UserController::class);
+
 // Route d registration 
 use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
@@ -29,6 +32,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 // Route d logout
 Route::post('/logout', [AuthController::class, 'logout']);
+
 
 Route::get('/profile', [AuthController::class, 'getUser'])->middleware('auth:sanctum'); 
 Route::put('/editFragrance/{id}',[FragranceController::class,'update']);

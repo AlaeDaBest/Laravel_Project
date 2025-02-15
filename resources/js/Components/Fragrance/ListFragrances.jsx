@@ -3,7 +3,7 @@ import Fragrance from "./Fragrance";
 import Header from "./Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
-const ListFragrances=()=>{
+const ListFragrances=(props)=>{
     const [fragrances,setFragrances]=useState([]);
     const[brands,setBrands]=useState([]);
     // Fetching the fragrances <-- list d fragrances
@@ -64,20 +64,13 @@ const ListFragrances=()=>{
             window.URL.revokeObjectURL(url);
         }catch(error){
             console.error('Error exporting:', error);
-
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
             console.error("Server Error:", error.response.data); // Log server error data
             alert(`Export failed: ${error.response.data.message || "An error occurred."}`); // Display server error message or generic message
         } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
             console.error("Request Error:", error.request);
             alert("Export failed: No response from the server.");
         } else {
-            // Something happened in setting up the request that triggered an Error
             console.error("Setup Error:", error.message);
             alert(`Export failed: ${error.message}`);
         }

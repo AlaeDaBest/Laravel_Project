@@ -18,6 +18,7 @@ const Header=({isLoggedIn,setIsLoggedIn})=>{
                 <div>
                     <Link to='/cart'>Cart</Link>
                     <Link to='/favorites'>Favorites</Link>
+                    <Link to='/users'>Users</Link>
                 </div>
             </nav>
             <nav id="auth">

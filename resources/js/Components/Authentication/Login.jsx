@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ArrowIcon from '../Fragrance/Icons/Arrow';
 
 const Login=({setIsLoggedIn})=> {
     const [email,setEmail]=useState('');
@@ -12,12 +13,12 @@ const Login=({setIsLoggedIn})=> {
         e.preventDefault();
         setErrors({});
         try {
-            const response = await axios.post('/login', { // No /api/ prefix
+            const response = await axios.post('/login', { 
                 email,
                 password,
             });
             if (response.status === 200) {
-                const user = response.data.user;
+                const user=response.data.user;
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userRole', user.role);
                 localStorage.setItem('user',JSON.stringify(user));
@@ -44,7 +45,11 @@ const Login=({setIsLoggedIn})=> {
         }
     };
     return(
-        <div>
+      <div className="login-container">
+        <div className='login-form'>
+          <ArrowIcon/>
+          <h1 className='brand-name'>Luxury Fragrance</h1>
+          <p className="tagline">Discover the magic of captivating scents.</p>
             <form onSubmit={handleSubmit}>
                 {/* ... your form fields */}
                 {errors.name && <p className="error">{errors.name[0]}</p>}
@@ -52,13 +57,18 @@ const Login=({setIsLoggedIn})=> {
                 {errors.password && <p className="error">{errors.password[0]}</p>}
                 {/* ... other error displays */}
                 {successMessage && <p className="success">{successMessage}</p>} {/* Display success message */}
-                <label htmlFor="">Email :</label>
-                <input type="text" name='email' onChange={(e)=>setEmail(e.target.value)} />
-                <label htmlFor="">Password :</label>
-                <input type="text" name='password' onChange={(e)=>setPassword(e.target.value)} />
-                <button type="submit">Register</button>
+                <div className='input-group'>
+                  <label htmlFor="">Email :</label>
+                  <input type="text" placeholder="Your email address" name='email' onChange={(e)=>setEmail(e.target.value)} />
+                </div>
+                <div className='input-group'>
+                  <label htmlFor="">Password :</label>
+                  <input type="text" placeholder="Your password" name='password' onChange={(e)=>setPassword(e.target.value)} />
+                <button type="submit" className="login-btn">Register</button>
+                </div>
             </form>
         </div>
+      </div>
     )
 };
 export default Login;

@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator=Validator::make($request->all(),[
-            'first_name'=>'required|string|max:255|email',
+            'first_name'=>'required|string|max:255',
             'last_name'=>'required|string|max:255',
             'email'=>'required|string|unique:users',
             'password'=>'required|string|min:8',
@@ -30,7 +30,7 @@ class AuthController extends Controller
             'last_name'=>$request->last_name,
             'adress'=> $request->last_name,
             'phone'=>$request->phone,
-            'role'=>'customer',
+            'role'=>'customer'
         ]);
         $token = $user->createToken('auth-token')->plainTextToken;
         return response()->json(['token' => $token, 'user' => $user], 201);

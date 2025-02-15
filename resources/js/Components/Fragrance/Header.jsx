@@ -14,7 +14,25 @@ const Header=(props)=>{
                     <input type="text" name="" id="" onChange={(e)=>props.setSearchedTerm(e.target.value)} />
                     <input type="button" value="Search" />
                 </div>
+                <div>
+                    <Link to='/cart'>Cart</Link>
+                    <Link to='/favorites'>Favorites</Link>
+                    <Link to='/users'>Users</Link>
+                </div>               
             </nav> 
+            <nav id="auth">
+                {props.isLoggedIn?
+                <div>
+                    <NavLink to='/profile'>Profile</NavLink>
+                    <Logout setIsLoggedIn={props.setIsLoggedIn} />
+                </div>
+                    :
+                <div>
+                    <NavLink to='/register'>Register</NavLink>
+                    <NavLink to='/login'>Log In</NavLink>
+                </div>
+                }
+            </nav>
         </header>
     )
 }
