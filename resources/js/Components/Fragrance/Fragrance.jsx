@@ -5,15 +5,27 @@ import { BiSolidTrash } from "react-icons/bi";
 import TrashIcon from "./Icons/TrashIcon";
 import EditFragrance from "./EditFragrance";
 import EditIcon from "./Icons/EditIcon";
+import axios from 'axios';
 const Fragrance=(props)=>{
     const [hidden,setHidden]=useState(true);
-    const [isEditing, setIsEditing] = useState(false); 
+    const [isEditing, setIsEditing] = useState(false);
+    const [onCart,setOncart]=useState(false);
+    const AddToCart = async (fragranceId) => {
+        try {
+          const response = await axios.post('/cart', {
+            fragrance_id: fragranceId,
+            quantity: 1, 
+          });
+        } catch (error) {
+          console.error("Error adding fragrance to the cart:", error);
+        }
+      };
     return(
-        <section className="Card" onClick={()=>setHidden(!hidden)}>
+        <section className="Card"  onClick={()=>setHidden(!hidden)}>
             <section className="ImageSection">
                 <article id="Icons">
                     <HeartIcon fragrance={props.fragrance} />
-                    <CartIcon/>
+                    <CartIcon  onCart={onCart} setOncart={setOncart}id={props.fragrance.id}  AddToCart={AddToCart} />
                 </article>
                 <img src={props.fragrance.image} width="200px" height="150px" alt="" />
             </section>

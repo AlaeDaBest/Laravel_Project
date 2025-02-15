@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('fragrance_id')->constrained('fragrances');
-            $table->foreignId('user_id')->constrained('customers');
-            $table->integer('quantity');
-            $table->timestamps();
+        Schema::table('cart', function (Blueprint $table) {
+            $table->integer('quantity')->after('fragrance_id'); 
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('cart', function (Blueprint $table) {
+            $table->dropColumn('quantity'); 
+        });
     }
 };
