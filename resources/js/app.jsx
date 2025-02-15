@@ -9,7 +9,11 @@ import AddFragrance from './Components/Fragrance/AddFragrance';
 import Registration from './Components/Authentication/Registration';
 import Login from './Components/Authentication/Login';
 import Profile from './Components/User/Profile';
+<<<<<<< HEAD
 import Cart from './Components/Cart/Cart';
+=======
+import EditFragrance from './Components/Fragrance/EditFragrance';
+>>>>>>> 8113c6ae4369ae42787dc3a2af0661704a534772
 
 const App=()=>{
     const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
@@ -27,6 +31,7 @@ const App=()=>{
                 {/* <Route path="/favoritess" element={<ListFavorites/>} /> */}
                 <Route path="/cart" element={<Cart/>} /> 
                 <Route path="/addFragrance" element={<AddFragrance/>} />
+                <Route path="/editFragrance/:id" element={<EditFragrance/>} />
                 <Route path="/register" element={<Registration/>} />
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                 <Route path="/profile" element={<Profile />} />

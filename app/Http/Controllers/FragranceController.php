@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rule;
+use App\Models\Import\ImportFragrance;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Exports\FragrancesExport;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FragranceController extends Controller
 {
@@ -77,22 +83,14 @@ class FragranceController extends Controller
             return response()->json(['message'=>$validator->errors()],400);
         }
         try{
-            // $imagePath='aa';
-            // if($request->hasFile('image')){
+            // Handling the image ಥ_ಥ
             
-
-            // $publicPath = public_path('Fragrances');
             $image=$request->file('image');
+            // dd($image);
             $imageName=$request->input('name').time() .'.'.strtolower($image->getClientOriginalExtension());
-
-            $publicPath = public_path('Images/Fragrances'); // Store directly in public
-            $imagePath ='Images/Fragrances/'.$imageName;       // Relative to public
+            $publicPath = public_path('Images/Fragrances'); 
+            $imagePath ='Images/Fragrances/'.$imageName;     
             $image->move($publicPath, $imageName);
-            // $imagePath=$image->storeAs('Images/Fragrances',$imageName,'public');
-            // $image->move($publicPath, $imageName);
-            // if(!$imagePath){
-            //     return response()->json(['message' => 'Error saving image'], 500);
-            // }
             $fragrance=new Fragrance();
             $fragrance->name=$request->input('name');
             $fragrance->release_date=$request->input('release_date');
@@ -102,7 +100,6 @@ class FragranceController extends Controller
             $fragrance->sex=$request->input('sex');
             $fragrance->volume_ml=$request->input('volume_ml');
             $fragrance->stock= (int)$request->input('stock');
-            // $fragrance->image='Images/Fragrances'.$imageName;
             $fragrance->image=$imagePath;
             $fragrance->save();
             return response()->json(['message' => 'Fragrance added successfully'], 200);
@@ -117,7 +114,8 @@ class FragranceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $fragrance=Fragrance::findOrFail($id);
+        return $fragrance;
     }
 
     /**
@@ -133,7 +131,53 @@ class FragranceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+        // dd($request->all());
+        // $validator=Validator::make($request->all(),[
+        //     'name'=>'string',
+        //     'brand_id'=>'exists:brands,id',
+        //     'release_date'=>'date',
+        //     'sex'=>'string',
+        //     'price'=>'numeric',
+        //     'genre'=>'string'
+        // ]);
+        // if($validator->fails()){
+        //     return response()->json(['errors'=>$validator->errors()],422);
+        // }
+        try{
+            $fragrance=Fragrance::findOrFail($id);
+            $fragrance->name=$request->name;
+            $fragrance->brand_id=$request->brand_id;
+            $fragrance->release_date=$request->release_date;
+            $fragrance->genre=$request->genre;
+            $fragrance->sex=$request->sex;
+            $fragrance->price=$request->price;
+            $fragrance->volume_ml=$request->volume_ml;
+            // dd($request->image);
+            // if($request->image!==null){
+                 // dd($fragrance->image);
+            //     if($fragrance->image){
+            //         dd($fragrance->image);
+            //         $images = $request->image;
+            //         $imageName = time() . '.' . $image->getClientOriginalExtension();
+            //         if($fragrance->image){
+            //             $oldImagePath=public_path($fragrance->image);
+            //             if(File::exists($oldImagePath)){
+            //                 File::delete($oldImagePath);
+            //             }
+            //         }
+            //         $image->move(public_path('Images/Fragrances'),$imageName);
+            //         $fragrance->image='Images/Fragrances'.$imageName;
+            //     }
+            //     return response()->json(['fragrance'=>fragrance],200);
+            // }
+            // dd($fragrance);
+            $fragrance->save();
+            return response()->json(['fragrance'=>$fragrance],200);
+        }catch(error){
+            return response()->json(['error' => 'Failed to update fragrance. ' . $e->getMessage()], 500); 
+        }
     }
 
     /**
@@ -144,5 +188,17 @@ class FragranceController extends Controller
         $fragrance=Fragrance::findOrFail($id);
         $fragrance->delete();
         return response()->json(null,204);
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file'=>'required|mimes:csv,txt,xlsx'
+        ]);
+        Excel::import(new ImportFragrance, $request->file('file'));
+        return back()->with('success', 'Products imported successfully.');
+    }
+    public function export(Request $request)
+    {
+        return Excel::download(new FragrancesExport, 'fragrances.xlsx'); 
     }
 }

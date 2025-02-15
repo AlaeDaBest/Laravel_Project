@@ -14,6 +14,7 @@ const AddFragrance=()=>{
     const fileInputRef=useRef(null);
     const [brands,setBrands]=useState([]);
     const [brand_id,setBrandId]=useState(3);
+    const [errors, setErrors] = useState({});
     const navigate=useNavigate();
     useEffect(()=>{
         axios.get('/brands')
@@ -59,16 +60,51 @@ const AddFragrance=()=>{
             console.error('Error adding fragrance:',error);
         }
     }
+    const [selectedFile,setSelectedFile]=useState(null);
+    const HandleImport=async(e)=>{
+        e.preventDefault();
+        if(!selectedFile){
+            alert('Select a CSV file');
+            return;
+        }
+        const apiUrl = "http://127.0.0.1:8000/import";
+        const formData=new FormData();
+        formData.append('file',selectedFile);
+        try {
+            const response = await axios.post(apiUrl, formData, {
+                headers: {
+                "Content-Type": "multipart/form-data",
+                },
+            });
+            console.log("Importing products went successfully:", response.data);
+            alert(" Nice Import Alae !");
+            navigate("/fragrances"); 
+        } catch (error) {
+            if (error.response) {
+                console.error("Server Error:", error.response.data);
+                alert("Error importing product: " + error.response.data.message);
+            } else if (error.request) {
+                console.error("Network Error:", error.request);
+                alert("Error: Unable to connect to the server.");
+            } else {
+                console.error("Error:", error.message);
+                alert("An unexpected error occurred.");
+            }
+        }
+    }
     return(
         <div>
             <Header/>
             <section>
+                <div>
+{/* Display error for name */}
+                </div>
                 <h1></h1>
                 <form onSubmit={Add}>
                     <section>
                         <div>
                             <label htmlFor="">Fragrance Name :</label>
-                            <input type="text" onChange={(e)=>setName(e.target.value)} />
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
                         </div>
                         <div>
                             <input type="file" ref={fileInputRef} />
@@ -76,7 +112,7 @@ const AddFragrance=()=>{
                     </section>
                     <section>
                         <label htmlFor="">Release Date :</label>
-                        <input type="date" onChange={(e)=>setRelease_Date(e.target.value)} />
+                        <input type="date"  onChange={(e)=>setRelease_Date(e.target.value)} />
                     </section>
                     <section>
                         <div>
@@ -131,6 +167,10 @@ const AddFragrance=()=>{
                         </div>
                     </section>
                     <input type="submit" value="Add Fragrance" />
+                    <div>
+                        <input type="file"  onChange={(e)=>setSelectedFile(e.target.files[0])} />
+                        <input type="submit" value="Import a file" onClick={HandleImport} />
+                    </div>
                 </form>
             </section>
         </div>
