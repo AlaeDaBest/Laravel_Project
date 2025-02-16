@@ -38,6 +38,7 @@ class CartController extends Controller
             'fragrance_id' => 'required|exists:fragrances,id',
             'quantity' => 'required|integer|min:1',
         ]);
+        // dd($request->all());
         try {
             $existingItem = Cart::where('user_id', Auth::id())
                                 ->where('fragrance_id', $validated['fragrance_id'])

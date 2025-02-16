@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-const Header=(props)=>{
-    const userRole=localStorage.getItem('userRole');
+import Logout from "../Authentication/Logout";
+const Header=({isLoggedIn,setIsLoggedIn})=>{
+    const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
+    console.log(userRole);
+    console.log(isLoggedIn)
     return(
-        <header className="Fragrance_header">
+        <header className="userHeader">
             <nav>
                 <div>
                     <NavLink to='/' className={({isActive})=>(isActive? 'active-link':'')} >Home</NavLink>
@@ -15,25 +18,21 @@ const Header=(props)=>{
                     ''
                     }
                 </div>
-                <div className="select">
-                    <input type="text" name="" id="" onChange={(e)=>props.setSearchedTerm(e.target.value)} />
-                    <input type="button" value="Search" />
-                </div>
                 <div>
                     <Link to='/cart'>Cart</Link>
                     <Link to='/favorites'>Favorites</Link>
                     {userRole=='admin'?
-                        <Link to='/users'>Users</Link>
+                    <Link to='/users'>Users</Link>
                     :
                     ''
-                    }                    
-                </div>               
-            </nav> 
+                    } 
+                </div>
+            </nav>
             <nav id="auth">
-                {props.isLoggedIn?
+                {isLoggedIn?
                 <div>
                     <NavLink to='/profile'>Profile</NavLink>
-                    <Logout setIsLoggedIn={props.setIsLoggedIn} />
+                    <Logout setIsLoggedIn={setIsLoggedIn} />
                 </div>
                     :
                 <div>

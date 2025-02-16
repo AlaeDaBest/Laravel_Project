@@ -107,8 +107,10 @@ const ListFragrances=(props)=>{
                         <option value="Desc">Newest to Oldest</option>
                         <option value="Asc">Oldest to Newest</option>
                     </select>
-                    <Link to="/addFragrance">Add Fragrance</Link>
-                    <input type="button" value="Export Fragrances" onClick={HandleExport} />
+                    {/* <Link to="/addFragrance">Add Fragrance</Link> */}
+                </div>
+                <div>
+                    <input type="button" value="Export Fragrances" onClick={HandleExport} />    
                 </div>
             </section>
             <section id="CardGlobal">

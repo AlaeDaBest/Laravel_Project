@@ -1,0 +1,29 @@
+.SelectBar{
+    display: flex;
+    justify-content: space-around;
+    font-family: monospace;
+    font-size: 1.1em;
+}
+.SelectBar label{
+    color: #bf9345 ;
+    font-weight: bold;
+}
+.SelectBar select{
+    border: none;
+    border-right: 3px solid #dea74a;
+    border-bottom: 3px solid #dea74a;
+    font-family: monospace;
+    width: 190px;
+}
+.SelectBar input[type=button]{
+    color: #dea74a;
+    background-color: rgba(191, 146, 69, 0);
+    /* padding: 1% 2%; */
+    width: 150px;
+    border:3px solid #dea74a;
+    font-weight: bold;
+}
+.SelectBar input[type=button]:hover{
+    background-color: rgba(191, 146, 69, 0.162);
+    font-style: italic;
+}

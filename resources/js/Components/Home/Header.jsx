@@ -13,12 +13,20 @@ const Header=({isLoggedIn,setIsLoggedIn})=>{
                     <NavLink to='/' className={({isActive})=>(isActive? 'active-link':'')} >Home</NavLink>
                     <NavLink to='/fragrances' className={({isActive})=>(isActive? 'active-link':'')} >Fragrances</NavLink>
                     <NavLink to='/about'>About</NavLink>
+                    {userRole=='admin'?
                     <NavLink to='/addFragrance' className={({isActive})=>(isActive? 'active-link':'')} >Add </NavLink>
+                    :
+                    ''
+                    }
                 </div>
                 <div>
                     <Link to='/cart'>Cart</Link>
                     <Link to='/favorites'>Favorites</Link>
+                    {userRole=='admin'?
                     <Link to='/users'>Users</Link>
+                    :
+                    ''
+                    } 
                 </div>
             </nav>
             <nav id="auth">

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BsCartDash } from "react-icons/bs";
 import { BsCartCheckFill } from "react-icons/bs";
+import axios from "axios";
 const CartIcon=(props)=>{
     const AddToCart = async (fragranceId) => {
         props.setOncart(true);
-        console.log('ff')
         try {
             const response = await axios.post('/cart', {
                 fragrance_id: fragranceId,

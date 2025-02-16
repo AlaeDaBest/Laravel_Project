@@ -10,6 +10,7 @@ const Fragrance=(props)=>{
     const [hidden,setHidden]=useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [onCart,setOncart]=useState(false);
+    const userRole=localStorage.getItem('userRole');
     const AddToCart = async (fragranceId) => {
         try {
           const response = await axios.post('/cart', {

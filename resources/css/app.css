@@ -31,42 +31,7 @@
     opacity: 80%;
     border: 1px solid black;
   }
-  header{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  #auth{
-    position: fixed;
-    width: 150px;
-    z-index: 1;
-    justify-content: center;
-    left: 1150px;
-  }
-  header nav{
-    background-color: rgba(255, 255, 255, 0.844);
-    position: fixed;
-    z-index: 1;
-    height: 30px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.5%;
-    width: 700px;
-    font-family: monospace;
-    font-size: 1.1em;
-  }
-  header nav a{
-    color: black;
-    margin: 3%;
-    text-decoration: none;
-  }
-  header nav input[type=button]{
-    background-color: white;
-    border:3px solid #bf9345;
-    color: #dea74a;
-    font-weight: bold;
-  }
+
   #slogan{
     position: relative;
     display: flex;

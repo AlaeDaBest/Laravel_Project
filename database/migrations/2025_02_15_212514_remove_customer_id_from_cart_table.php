@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('cart', function (Blueprint $table) {
             // $table->dropForeign(['customer_id']);
-            $table->dropColumn('customer_id');
-            $table->foreignId('user_id')->constrained('users');
+            // $table->dropColumn('customer_id');
+            $table->foreignId('user_id')->constrained('users')->after('email');
         });
     }
 
