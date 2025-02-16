@@ -25,6 +25,9 @@ Route::resource('/brands', BrandController::class);
 use App\Http\Controllers\CartController;
 Route::resource('/cart', CartController::class);
 
+use App\Http\Controllers\FavoriteController;
+Route::resource('/favorites', FavoriteController::class);
+
 // Route d registration 
 use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
